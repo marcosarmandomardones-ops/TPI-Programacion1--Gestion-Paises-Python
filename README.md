@@ -4,7 +4,7 @@
 
 ---
 
-## 📝 Información General
+## Información General
 
 - **Materia:** Programación I  
 - **Año:** 2025  
@@ -14,7 +14,7 @@
 
 ---
 
-## 📌 Descripción del Proyecto
+## Descripción del Proyecto
 
 Este proyecto corresponde al Trabajo Práctico Integrador (TPI) de la asignatura **Programación I**.
 
@@ -33,7 +33,7 @@ El sistema se ejecuta por consola e incorpora un **menú interactivo** que permi
 
 ---
 
-## 🎯 Objetivos del Trabajo
+## Objetivos del Trabajo
 
 - Aplicar los conceptos fundamentales de Programación 1.  
 - Leer y procesar datos desde un archivo CSV.  
@@ -44,26 +44,26 @@ El sistema se ejecuta por consola e incorpora un **menú interactivo** que permi
 
 ---
 
-## ✅ Características del Sistema
+## Características del Sistema
 
-### 📍 Gestión de países
+### Gestión de países
 - Agregar un nuevo país (con validación de campos)  
 - Actualizar población o superficie de un país existente  
 
-### 🔎 Búsquedas
+### Búsquedas
 - Buscar por nombre (coincidencia exacta o parcial)
 
-### 🧩 Filtros
+### Filtros
 - Filtrar por continente  
 - Filtrar por rango de población  
 - Filtrar por rango de superficie  
 
-### 📊 Ordenamientos
+### Ordenamientos
 - Ordenar por nombre  
 - Ordenar por población  
 - Ordenar por superficie (ascendente o descendente)
 
-### 📈 Estadísticas
+### Estadísticas
 - País con mayor población  
 - País con menor población  
 - Promedio de población  
@@ -72,7 +72,43 @@ El sistema se ejecuta por consola e incorpora un **menú interactivo** que permi
 
 ---
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 El proyecto se encuentra modularizado siguiendo buenas prácticas:
+
+src/
+│── main.py # Menú principal y flujo general del programa
+│── archivos.py # Lectura del CSV y validaciones
+│── consultas.py # Búsquedas de países
+│── filtros.py # Filtrado por criterios
+│── ordenamientos.py # Ordenamientos por nombre, población y superficie
+│── estadisticas.py # Cálculo de indicadores
+│── validaciones.py # Validación de entradas del usuario
+│
+└── data/
+└── paises.csv # Dataset base del proyecto
+
+---
+
+## Dataset Utilizado
+
+El archivo CSV debe tener el siguiente formato:
+
+
+
+
+
+---
+
+## Requerimientos Técnicos
+
+- Python **3.x**
+- No requiere librerías externas (solo módulos estándar)
+
+---
+
+## Instrucciones de Ejecución
+
+### 1️⃣ Clonar el repositorio:
+
 
