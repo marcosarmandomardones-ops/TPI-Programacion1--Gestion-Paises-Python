@@ -76,18 +76,23 @@ El sistema se ejecuta por consola e incorpora un **menú interactivo** que permi
 
 El proyecto se encuentra modularizado siguiendo buenas prácticas:
 
-
-
-
+```
+ proyecto-paises
+ ├── main.py
+ ├── paises.csv
+ ├── README.md
+```
 
 ---
 
 ## Dataset Utilizado
 
-El archivo CSV debe tener el siguiente formato:
+Los datos se leen y escriben en un archivo CSV **paises.csv**, que contiene los campos:
 
-
-
+- nombre  
+- población  
+- superficie  
+- continente  
 
 
 ---
@@ -95,12 +100,34 @@ El archivo CSV debe tener el siguiente formato:
 ## Requerimientos Técnicos
 
 - Python **3.x**
-- No requiere librerías externas (solo módulos estándar)
+- No usa librerías externas (solo `csv` y `os`).
 
 ---
 
 ## Instrucciones de Ejecución
 
-### 1. Clonar el repositorio:
+```bash
+python main.py
+```
+
+El programa se ejecuta por consola mostrando un menú interactivo.
+
+---
+
+## Ejemplo de registro de país
+
+```
+Ingrese el nombre del país: argentina
+Ingrese su población: 45000000
+Ingrese su superficie: 2780000
+Ingrese el continente del país: america
+```
+
+---
+
+## Autores
+
+- *Pablo Mazuquin / Marcos Mardones*
+- UTN – Tecnicatura Universitaria en Programación
 
 
