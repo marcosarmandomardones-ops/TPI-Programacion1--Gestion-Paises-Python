@@ -125,7 +125,7 @@ Ingrese el continente del país: america
 
 ---
 
-## Autores
+## Autores: 
 
 - *Pablo Mazuquin / Marcos Mardones*
 - UTN – Tecnicatura Universitaria en Programación
