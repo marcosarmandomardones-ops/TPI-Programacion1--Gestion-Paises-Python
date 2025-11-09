@@ -136,16 +136,16 @@ def buscar_paises():
     if len(lista_resultado) == 0:
         print("No se encontraron resultados en la búsqueda")
         return
-
-    # mostrar resultados de la busqueda 
-    print("\nResultados encontrados:")
-    print("---------------------------")
-    for pais in lista_resultado:
-        print(f"Nombre: {pais['nombre'].capitalize()}")
-        print(f"Población: {pais['poblacion']}")
-        print(f"Superficie: {pais['superficie']}")
-        print(f"Continente: {pais['continente'].capitalize()}")
+    else:
+        # mostrar resultados de la busqueda 
+        print("\nResultados encontrados:")
         print("---------------------------")
+        for pais in lista_resultado:
+            print(f"Nombre: {pais['nombre'].capitalize()}")
+            print(f"Población: {pais['poblacion']}")
+            print(f"Superficie: {pais['superficie']}")
+            print(f"Continente: {pais['continente'].capitalize()}")
+            print("---------------------------")
 
 
 
