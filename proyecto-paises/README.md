@@ -77,10 +77,10 @@ El sistema se ejecuta por consola e incorpora un **menú interactivo** que permi
 El proyecto se encuentra modularizado siguiendo buenas prácticas:
 
 ```
- proyecto-paises
+ proyecto-paises/
  ├── main.py
- ├── paises.csv
  ├── README.md
+ paises.csv
 ```
 
 ---
