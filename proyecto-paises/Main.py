@@ -1,44 +1,65 @@
+## Proyecto Integrador Programación I:
+# Sistema de Gestión de Datos de Países en Python
+
+# Descripción:
+    # Este programa permite gestionar información de países utilizando un archivo CSV como base de datos. Incluye funciones para:
+        #- Agregar países
+        #- Actualizar datos
+        #- Buscar por nombre
+        #- Filtrar por distintos criterios
+        #- Ordenar información
+        #- Mostrar estadísticas generales
+
+    #El programa utiliza un menú interactivo y validaciones para asegurar que los datos ingresados sean correctos.
+
+# Autores: Pablo Mazuquin / Marcos Mardones
+# Materia: Programación I
+# Año: 2025
+
+# ---------------------------------------------------
+# Módulos importados
 import csv
 import os
 NOMBRE_ARCHIVO = "paises.csv"
 
+# FUNCION PARA OBTENER DATOS DEL CSV
 def obtener_datos():
     
     lista_paises = []
-        #Crea el archivo si no existe
+        # Crea el archivo si no existe
     if not os.path.exists(NOMBRE_ARCHIVO):
-        with open(NOMBRE_ARCHIVO, "w", newline="", encoding="utf_8") as archivo:
+        with open(NOMBRE_ARCHIVO, "w", newline="", encoding="utf-8") as archivo:
             escritor = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
-            #Escribe la primera fila del CSV, o sea, los encabezados
+            # Escribe la primera fila del CSV, o sea, los encabezados
             escritor.writeheader()
 
             return lista_paises
     
-    with open(NOMBRE_ARCHIVO, newline="", encoding="utf_8") as archivo:
-        #Lee el formato csv interpreta las columnas
+    with open(NOMBRE_ARCHIVO, newline="", encoding="utf-8") as archivo:
+        # Lee el formato csv interpreta las columnas
         lector = csv.DictReader(archivo)
-        #Recorre y crea un diccionario y agregar cada diccionario a la lista
+        # Recorre y crea un diccionario y agregar cada diccionario a la lista
         for fila in lector:
             lista_paises.append({"nombre": fila["nombre"], "poblacion": int(fila["poblacion"]), "superficie": int(fila["superficie"]), "continente": fila["continente"] })
 
     return lista_paises
         
 
-#FUNC PARA AGREGAR PAIS AL CSV
+# FUNCION PARA AGREGAR PAIS AL CSV
 def agregar_pais_archivo(pais):
     with open(NOMBRE_ARCHIVO, "a", newline="", encoding="utf-8") as archivo:
         escritor = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
         escritor.writerow(pais)
 
 
-#Func para ingresar paises (1)
+# FUNCION PARA INGRESAR PAIS (1)
 def ingresar_pais():
     while True:
         print("\n")
         print("------ INGRESA UN PAIS ------")
         nombre = input("Ingrese el nombre del pais:  ").strip()
 
-        #Comprueba si el pais ya existe
+        # Comprueba si el pais ya existe
         if existe_dato(nombre):
             print("Este pais ya fue agregado previamente.")
             continue # Vuelve al inicio del while  
@@ -54,7 +75,7 @@ def ingresar_pais():
             continue
 
         poblacion = input("Ingrese su poblacion: ").strip()
-        #Comprueba que sea un numero valido
+        # Comprueba que sea un numero valido
         if not validar_numero(poblacion):
             print("Error al ingresar el numero de poblacion")
             continue
@@ -63,7 +84,7 @@ def ingresar_pais():
 
         superficie = input("Ingrese su superficie: ").strip()
 
-
+        # Comprueba que sea un número válido:
         if not validar_numero(superficie):
             print("Error al ingresar la superficie")
             continue
@@ -83,24 +104,24 @@ def ingresar_pais():
         continente = continente.lower()
         
         break
-
+        # Agrega el país al archivo CSV
     agregar_pais_archivo({"nombre": nombre, "poblacion": poblacion, "superficie": superficie, "continente": continente })
     print("| Lista de paises actualizada! |")
 
 
-#FUNC PARA ACTUALZIAR DATOS (2)
+# FUNCION PARA ACTUALZIAR DATOS (2)
 def actualizar_datos():
     lista_paises = obtener_datos()
     print("Actualizar los datos de Poblacion y Superficie")
     nombre = input("Ingresa el nombre del pais que desee actualizar los datos").strip().lower()
     
     nombre_pais_encontrado = None
-
+    # Buscar el país en la lista
     for paises in lista_paises:
         if paises["nombre"].lower() == nombre.lower():
             nombre_pais_encontrado = nombre
             break
-
+            # Si encontramos el país, solicitamos nuevos datos
     if not nombre_pais_encontrado:
         print(f"Error: El pais '{nombre}' no fue encontrado.")
         return
@@ -114,7 +135,7 @@ def actualizar_datos():
     ejemplares = int(ejemplares)
 
     
-# funcion para buscar paises (3)
+# FUNCION PARA BUSCAR PAIS (3)
 def buscar_paises():
     print("\n------ Buscar Países ------")
     nombre_pais = input("Ingrese parte o el nombre completo del país: ").strip().lower()
@@ -122,7 +143,7 @@ def buscar_paises():
     if nombre_pais == "":
         print("Error al ingresar el nombre del país")
         return
-    
+    # Obtener la lista de países
     lista_paises = obtener_datos()
     lista_resultado = []
 
@@ -148,22 +169,20 @@ def buscar_paises():
             print("---------------------------")
 
 
-
-
-# Función para filtrar países (4)
+# FUNCION PARA FILTRAR PAISES (4)
 def filtrar_paises():
     print("\n------ Filtrar Países ------")
     print("1. Filtrar por continente")
     print("2. Filtrar por población mínima")
     print("3. Filtrar por superficie mínima")
     print("4. Volver al menú")
-
+    # Selección de opción
     opcion_filtro = input("Seleccione una opción: ").strip()
 
     lista_paises = obtener_datos()
     lista_filtrada = []
 
-    # filtar por continente 
+    # filtrar por continente 
     if opcion_filtro == "1":
         continente = input("Ingrese el continente: ").strip().lower()
 
@@ -175,16 +194,12 @@ def filtrar_paises():
             if pais["continente"].lower() == continente:
                 lista_filtrada.append(pais)
 
-    # filtrar por poblción minima
+    # filtrar por población mínima
     elif opcion_filtro == "2":
         poblacion = input("Ingrese población mínima: ").strip()
 
         if not validar_numero(poblacion):
             print("Error al ingresar un número no válido")
-            return
-
-        if not validar_texto(continente):
-            print("Error: El nombre no puede ser un número. Intente de nuevo.")
             return
 
         poblacion = int(poblacion)
@@ -193,7 +208,7 @@ def filtrar_paises():
             if pais["poblacion"] >= poblacion:
                 lista_filtrada.append(pais)
 
-    # filtrar por superficie minima
+    # filtrar por superficie mínima
     elif opcion_filtro == "3":
         superficie = input("Ingrese superficie mínima: ").strip()
 
@@ -207,9 +222,10 @@ def filtrar_paises():
             if pais["superficie"] >= superficie:
                 lista_filtrada.append(pais)
 
-    # Volver al menú
+    # volver al menú
     elif opcion_filtro == "4":
         return
+
     else:
         print("Opción no válida")
         return
@@ -217,10 +233,9 @@ def filtrar_paises():
     if len(lista_filtrada) == 0:
         print("No se encontraron países")
         return
-
+    # Mostrar los países filtrados
     print("\nPaíses filtrados:")
     print("---------------------------")
-
     for pais in lista_filtrada:
         print(f"Nombre: {pais['nombre'].capitalize()}")
         print(f"Población: {pais['poblacion']}")
@@ -229,14 +244,14 @@ def filtrar_paises():
         print("---------------------------")
 
 
-# funcion para ordenar paises (5)
+# FUNCION PARA ORDENAR PAISES (5)
 def ordenar_paises():
     print("\n------ Ordenar Países ------")
     print("1. Ordenar por nombre (A-Z)")
     print("2. Ordenar por población (menor a mayor)")
     print("3. Ordenar por superficie (menor a mayor)")
     print("4. Volver al menú")
-
+    
     opcion = input("Seleccione una opción: ").strip()
     if opcion not in ["1", "2", "3", "4"]:
         print("Error: Opcion invalida")
@@ -249,7 +264,7 @@ def ordenar_paises():
     lista = obtener_datos()
     long_lista = len(lista)
 
-    # Ciclo para ordenar 
+    # Ciclo para ordenar la lista (ciclo burbuja)
     for i in range(long_lista):
         for j in range(long_lista - 1):
             
@@ -283,7 +298,7 @@ def ordenar_paises():
         print("---------------------------")
 
 
-# funcion para mostrar estadisticas (6)
+# FUNCION PARA MOSTRAR ESTADISTICAS (6)
 def mostrar_estadisticas():
     print("\n------ Estadísticas de Países ------")
     lista = obtener_datos()
@@ -292,15 +307,15 @@ def mostrar_estadisticas():
         print("No encontramos países registrados")
         return
     
-
+    # Calculo de estadísticas
     total_paises = len(lista)
     total_poblacion = 0
     total_superficie = 0
 
     mayor_poblacion = lista[0]
     mayor_superficie = lista[0]
- 
-    for pais in lista:   # recorremos la lista para calcular mayores y totales
+    # Recorremos la lista para calcular mayores y totales
+    for pais in lista:
         total_poblacion += pais["poblacion"]
         total_superficie += pais["superficie"]
 
@@ -309,7 +324,8 @@ def mostrar_estadisticas():
 
         if pais["superficie"] > mayor_superficie["superficie"]:
             mayor_superficie = pais
-    # calculo de promedios
+    
+    # Cálculo de promedios
     promedio_poblacion = total_poblacion // total_paises
     promedio_superficie = total_superficie // total_paises
 
@@ -322,7 +338,7 @@ def mostrar_estadisticas():
     print(f"País con mayor superficie: {mayor_superficie['nombre'].capitalize()} ({mayor_superficie['superficie']} km²)")
 
 
-
+# FUNCION PARA VERIFICAR SI EL PAIS YA EXISTE
 def existe_dato(dato):
     lista_paises = obtener_datos()
 
@@ -333,17 +349,13 @@ def existe_dato(dato):
     return False
 
 
-    #FUNC PARA VALIDAR NUMERO
+    #FUNCION PARA VALIDAR NUMERO
 def validar_numero(numero):
     numero = numero.strip()
-    if numero.isdigit():
-        numero = int(numero)
-        return True
-    
-    return False
+    return numero.isdigit()
 
 
-#FUNC PARA VALIDAR TEXTO
+#FUNCION PARA VALIDAR TEXTO
 def validar_texto(texto):
     """
     Valida que el texto no esté vacío y que no sea un número.
@@ -362,7 +374,7 @@ def validar_texto(texto):
     # 3. Si pasó las dos pruebas, es un texto válido
     return True
 
-
+# MENU PRINCIPAL
 def mostrar_menu():
     while True:
         print("\n")
@@ -378,6 +390,7 @@ def mostrar_menu():
 
         opcion_menu = input("Ingrese una opcion: ").strip()
 
+        # Evaluar la opción seleccionada
         match opcion_menu:
             case "1":
                 ingresar_pais()
@@ -392,7 +405,8 @@ def mostrar_menu():
             case "6":
                 mostrar_estadisticas()
             case "7":
-                break#break()
+                print("Saliendo del sistema. ¡Gracias por usar el programa!")
+                break
             case __:
                 print("La opcion seleccionada no es valida.")
 mostrar_menu()
