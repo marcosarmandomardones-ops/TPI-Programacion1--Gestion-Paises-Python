@@ -26,14 +26,14 @@ NOMBRE_ARCHIVO = "paises.csv"
 def obtener_datos():
     
     lista_paises = []
-        # Crea el archivo si no existe
+    # Crea el archivo si no existe
     if not os.path.exists(NOMBRE_ARCHIVO):
         with open(NOMBRE_ARCHIVO, "w", newline="", encoding="utf-8") as archivo:
             escritor = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
             # Escribe la primera fila del CSV, o sea, los encabezados
             escritor.writeheader()
 
-            return lista_paises
+        return lista_paises
     
     with open(NOMBRE_ARCHIVO, newline="", encoding="utf-8") as archivo:
         # Lee el formato csv interpreta las columnas
@@ -145,7 +145,9 @@ def buscar_paises():
         return
     # Obtener la lista de países
     lista_paises = obtener_datos()
+    
     lista_resultado = []
+
 
     # Recorremos la lista de paises
     for pais in lista_paises:
